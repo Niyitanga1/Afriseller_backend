@@ -40,10 +40,11 @@
       19 => 'Illuminate\\Translation\\TranslationServiceProvider',
       20 => 'Illuminate\\Validation\\ValidationServiceProvider',
       21 => 'Illuminate\\View\\ViewServiceProvider',
-      22 => 'App\\Providers\\AppServiceProvider',
-      23 => 'App\\Providers\\AuthServiceProvider',
-      24 => 'App\\Providers\\EventServiceProvider',
-      25 => 'App\\Providers\\RouteServiceProvider',
+      22 => 'L5Swagger\\L5SwaggerServiceProvider',
+      23 => 'App\\Providers\\AppServiceProvider',
+      24 => 'App\\Providers\\AuthServiceProvider',
+      25 => 'App\\Providers\\EventServiceProvider',
+      26 => 'App\\Providers\\RouteServiceProvider',
     ),
     'aliases' => 
     array (
@@ -92,7 +93,7 @@
   array (
     'defaults' => 
     array (
-      'guard' => 'web',
+      'guard' => 'api',
       'passwords' => 'users',
     ),
     'guards' => 
@@ -100,6 +101,11 @@
       'web' => 
       array (
         'driver' => 'session',
+        'provider' => 'users',
+      ),
+      'api' => 
+      array (
+        'driver' => 'jwt',
         'provider' => 'users',
       ),
       'sanctum' => 
@@ -195,7 +201,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\framework/cache/data',
+        'path' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -368,13 +374,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\app',
+        'root' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\app',
         'throw' => false,
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\app/public',
+        'root' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
         'throw' => false,
@@ -394,7 +400,7 @@
     ),
     'links' => 
     array (
-      'D:\\PROJECTS\\LARAVEL\\company\\public\\storage' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\app/public',
+      'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\public\\storage' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -409,6 +415,159 @@
       'memory' => 65536,
       'threads' => 1,
       'time' => 4,
+    ),
+  ),
+  'jwt' => 
+  array (
+    'secret' => 'lVIlQpqHGpqfXRWAj6cVg8CvUI2rqoxdjU5OlHhIwePBdkeNg2wt372Y8N000r2q',
+    'keys' => 
+    array (
+      'public' => NULL,
+      'private' => NULL,
+      'passphrase' => NULL,
+    ),
+    'ttl' => 60,
+    'refresh_ttl' => 20160,
+    'algo' => 'HS256',
+    'required_claims' => 
+    array (
+      0 => 'iss',
+      1 => 'iat',
+      2 => 'exp',
+      3 => 'nbf',
+      4 => 'sub',
+      5 => 'jti',
+    ),
+    'persistent_claims' => 
+    array (
+    ),
+    'lock_subject' => true,
+    'leeway' => 0,
+    'blacklist_enabled' => true,
+    'blacklist_grace_period' => 0,
+    'show_black_list_exception' => true,
+    'decrypt_cookies' => false,
+    'providers' => 
+    array (
+      'jwt' => 'PHPOpenSourceSaver\\JWTAuth\\Providers\\JWT\\Lcobucci',
+      'auth' => 'PHPOpenSourceSaver\\JWTAuth\\Providers\\Auth\\Illuminate',
+      'storage' => 'PHPOpenSourceSaver\\JWTAuth\\Providers\\Storage\\Illuminate',
+    ),
+  ),
+  'l5-swagger' => 
+  array (
+    'default' => 'default',
+    'documentations' => 
+    array (
+      'default' => 
+      array (
+        'api' => 
+        array (
+          'title' => 'L5 Swagger UI',
+        ),
+        'routes' => 
+        array (
+          'api' => 'api/documentation',
+        ),
+        'paths' => 
+        array (
+          'use_absolute_path' => true,
+          'docs_json' => 'api-docs.json',
+          'docs_yaml' => 'api-docs.yaml',
+          'format_to_use_for_docs' => 'json',
+          'annotations' => 
+          array (
+            0 => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\app',
+          ),
+        ),
+      ),
+    ),
+    'defaults' => 
+    array (
+      'routes' => 
+      array (
+        'docs' => 'docs',
+        'oauth2_callback' => 'api/oauth2-callback',
+        'middleware' => 
+        array (
+          'api' => 
+          array (
+          ),
+          'asset' => 
+          array (
+          ),
+          'docs' => 
+          array (
+          ),
+          'oauth2_callback' => 
+          array (
+          ),
+        ),
+        'group_options' => 
+        array (
+        ),
+      ),
+      'paths' => 
+      array (
+        'docs' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\api-docs',
+        'views' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\resources/views/vendor/l5-swagger',
+        'base' => NULL,
+        'swagger_ui_assets_path' => 'vendor/swagger-api/swagger-ui/dist/',
+        'excludes' => 
+        array (
+        ),
+      ),
+      'scanOptions' => 
+      array (
+        'analyser' => NULL,
+        'analysis' => NULL,
+        'processors' => 
+        array (
+        ),
+        'pattern' => NULL,
+        'exclude' => 
+        array (
+        ),
+        'open_api_spec_version' => '3.0.0',
+      ),
+      'securityDefinitions' => 
+      array (
+        'securitySchemes' => 
+        array (
+        ),
+        'security' => 
+        array (
+          0 => 
+          array (
+          ),
+        ),
+      ),
+      'generate_always' => true,
+      'generate_yaml_copy' => false,
+      'proxy' => false,
+      'additional_config_url' => NULL,
+      'operations_sort' => NULL,
+      'validator_url' => NULL,
+      'ui' => 
+      array (
+        'display' => 
+        array (
+          'doc_expansion' => 'none',
+          'filter' => true,
+        ),
+        'authorization' => 
+        array (
+          'persist_authorization' => false,
+          'oauth2' => 
+          array (
+            'use_pkce_with_authorization_code_grant' => false,
+          ),
+        ),
+      ),
+      'constants' => 
+      array (
+        'L5_SWAGGER_CONST_HOST' => 'http://my-default-host.com',
+      ),
     ),
   ),
   'logging' => 
@@ -433,13 +592,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\logs/laravel.log',
+        'path' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\logs/laravel.log',
+        'path' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -491,7 +650,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\logs/laravel.log',
+        'path' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -557,7 +716,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\PROJECTS\\LARAVEL\\company\\resources\\views/vendor/mail',
+        0 => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -663,7 +822,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\framework/sessions',
+    'files' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -683,9 +842,34 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\PROJECTS\\LARAVEL\\company\\resources\\views',
+      0 => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\resources\\views',
     ),
-    'compiled' => 'D:\\PROJECTS\\LARAVEL\\company\\storage\\framework\\views',
+    'compiled' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\storage\\framework\\views',
+  ),
+  'inertia' => 
+  array (
+    'ssr' => 
+    array (
+      'enabled' => true,
+      'url' => 'http://127.0.0.1:13714',
+    ),
+    'testing' => 
+    array (
+      'ensure_pages_exist' => true,
+      'page_paths' => 
+      array (
+        0 => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT\\resources\\js/Pages',
+      ),
+      'page_extensions' => 
+      array (
+        0 => 'js',
+        1 => 'jsx',
+        2 => 'svelte',
+        3 => 'ts',
+        4 => 'tsx',
+        5 => 'vue',
+      ),
+    ),
   ),
   'passport' => 
   array (
@@ -772,7 +956,7 @@
     array (
     ),
     'enable_runnable_solutions' => NULL,
-    'remote_sites_path' => 'D:\\PROJECTS\\LARAVEL\\company',
+    'remote_sites_path' => 'D:\\PROJECTS\\LARAVEL\\AFRISELLERS_AUTH_JWT',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',

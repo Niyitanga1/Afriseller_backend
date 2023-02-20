@@ -81,7 +81,7 @@ class LoginController extends Controller
             if($user){
 
                 if(Hash::check($request->password,$user->password) && $user->status==1 ){
-                    $token=$user->createToken($user->email)->plainTextToken;
+                    $token=$user->createToken('authToken')->accessToken();
                     $user->remember_token=$token;
                     $user->save();
 
@@ -94,7 +94,8 @@ class LoginController extends Controller
                         
                       ],200);
                 } 
-           }}
+           }
+    }
 
 
             if ($validator1->validated()){
