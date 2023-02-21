@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('users/login',[AuthController::class,'login']);
+Route::post('users/login_by_phone',[AuthController::class,'login_phone']);
+Route::post('registerusers',[AuthController::class,'register']);
+Route::post('users',[AuthController::class,'register']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
-Route::post('users',[Controller::class,'register']);
-Route::post('users/login',[LoginController::class,'login']);
+Route::middleware('auth:api')->group( function(){
+ 
 Route::post('users/logout',[LoginController::class,'logout']);
 
 
@@ -40,23 +40,10 @@ Route::post('quiz',[Controller::class,'store_quiz']);
 Route::post('question_bank',[Controller::class,'store_question_bank']);
 
 
-//=====================Routes for Views=====================
-
-Route::get('view_companies',[Controller::class,'view_companies']);
-Route::get('view_users',[Controller::class,'view_users']);
-Route::get('view_company_full_services',[Controller::class,'view_company_full_services']);
-Route::get('view_company_full_service_details',[Controller::class,'view_company_full_service_details']);
-Route::get('view_image_for_full_service_details',[Controller::class,'view_image_for_full_service_details']);
-Route::get('view_membership_plan',[Controller::class,'view_membership_plan']);
-Route::get('view_quiz_booking',[Controller::class,'view_quiz_booking']);
-Route::get('view_activated_membership_plan',[Controller::class,'view_activated_membership_plan']);
-Route::get('view_quiz_response',[Controller::class,'view_quiz_response']);
-Route::get('view_question_bank_options',[Controller::class,'view_question_bank_options']);
-Route::get('view_quizzes',[Controller::class,'view_quizzes']);
-Route::get('view_question_bank',[Controller::class,'view_question_bank']);
 
 
 //=====================Routes for Deleting=====================
+
 
 Route::delete('users/{id}',[Controller::class,'delete_user']);
 Route::delete('company/{id}',[Controller::class,'delete_company']);
@@ -84,6 +71,23 @@ Route::put('update_activated_membership_plan/{id}',[Controller::class,'update_ac
 Route::put('update_question_bank_options/{id}',[Controller::class,'update_question_bank_options']);
 Route::put('update_quizzes/{id}',[Controller::class,'update_quizzes']);
 Route::put('update_question_bank/{id}',[Controller::class,'update_question_bank']);
+});
+
+
+//=====================Routes for Views=====================
+
+Route::get('view_companies',[Controller::class,'view_companies']);
+Route::get('view_users',[Controller::class,'view_users']);
+Route::get('view_company_full_services',[Controller::class,'view_company_full_services']);
+Route::get('view_company_full_service_details',[Controller::class,'view_company_full_service_details']);
+Route::get('view_image_for_full_service_details',[Controller::class,'view_image_for_full_service_details']);
+Route::get('view_membership_plan',[Controller::class,'view_membership_plan']);
+Route::get('view_quiz_booking',[Controller::class,'view_quiz_booking']);
+Route::get('view_activated_membership_plan',[Controller::class,'view_activated_membership_plan']);
+Route::get('view_quiz_response',[Controller::class,'view_quiz_response']);
+Route::get('view_question_bank_options',[Controller::class,'view_question_bank_options']);
+Route::get('view_quizzes',[Controller::class,'view_quizzes']);
+Route::get('view_question_bank',[Controller::class,'view_question_bank']);
 
 
 

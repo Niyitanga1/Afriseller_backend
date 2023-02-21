@@ -49,7 +49,7 @@ $request->validate([
             'password'=>Hash::make($request->input('password')),
             'status'=>$request->input('status'),
             'previlage'=>$request->input('previlage'),
-            'registered_date'=>$request->input('registered_date'),
+            'registered_date'=>now(),
             'is_login'=>$request->input('is_login')
 
    ] );
